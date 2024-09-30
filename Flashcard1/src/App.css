@@ -1,0 +1,91 @@
+/* Body background */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('/pexels-fwstudio-33348-129731.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: #000; /* Change the default text color to black */
+}
+
+/* App container */
+.app {
+  text-align: center;
+  margin-top: 50px;
+  color: #000; /* Change the text color to black */
+  
+}
+
+/* Description styling */
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Flashcard styling */
+.flashcard {
+  width: 300px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  perspective: 1000px; /* Enables 3D flip effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+}
+
+/* Container for the front and back sides */
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d; /* Allows 3D rotation */
+  transition: transform 0.6s ease-in-out; /* Smooth transition */
+}
+
+/* Front and back faces of the flashcard */
+.flashcard .front, .flashcard .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden; /* Hides the back when the card is flipped */
+  border: 1px solid #ccc; /* Add border for better visibility */
+  background-color: white; /* Ensure background color is white */
+  color: #000; /* Change the text color to black */
+}
+
+/* Back face initial rotation */
+.flashcard .back {
+  transform: rotateY(180deg); /* Rotate back face so it's initially hidden */
+}
+
+/* Flipped state */
+.flashcard-inner.flipped {
+  transform: rotateY(180deg); /* Rotate the entire card */
+}
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
