@@ -1,8 +1,8 @@
-# Web Development Project 2 - *Name of App Here*
+# Web Development Project 2 - *FlascardPart2*
 
 Submitted by: **Roshan Sapkota**
 
-This web app: **Flashcards Part 1!**
+This web app: **Flashcards Part 2!**
 
 Time spent: **5** hours spent in total
 
@@ -33,7 +33,7 @@ Here's a walkthrough of implemented required features:
 <img src="GIF_WALKTHROUGH11.gif" title="Video Walkthrough" width="500" alt="Video Walkthrough" />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
+GIF created with Licecap. 
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
