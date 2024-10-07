@@ -4,12 +4,12 @@ import "./App.css"; // Link to your CSS file
 // Flashcard Component
 const Flashcard = ({ card, isFlipped, handleFlip }) => {
   return (
-    <div className="flashcard" onClick={handleFlip}>
+    <div className="flashcard">
       <div className={`flashcard-inner ${isFlipped ? 'flipped' : ''}`}>
-        <div className="front">
+        <div className="front" onClick={handleFlip}>
           <p>{card.question}</p>
         </div>
-        <div className="back">
+        <div className="back" onClick={handleFlip}>
           <p>{card.answer}</p>
         </div>
       </div>
@@ -21,6 +21,8 @@ const Flashcard = ({ card, isFlipped, handleFlip }) => {
 function FlashcardApp() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [userAnswer, setUserAnswer] = useState(""); // User input for the answer
+  const [feedback, setFeedback] = useState(""); // Feedback for the answer
 
   // Sample flashcards array (soccer-related questions)
   const flashcards = [
@@ -41,23 +43,64 @@ function FlashcardApp() {
     setIsFlipped(!isFlipped);
   };
 
-  // Handle next button click (randomly selects a new card)
+  // Handle next button click
   const handleNextCard = () => {
-    const newIndex = Math.floor(Math.random() * flashcards.length);
+    const newIndex = (currentIndex + 1) % flashcards.length; // Move to next card in sequence
     setCurrentIndex(newIndex);
     setIsFlipped(false); // Reset flip state when switching cards
+    setUserAnswer(""); // Clear user input
+    setFeedback(""); // Clear feedback
+  };
+
+  // Handle back button click
+  const handlePrevCard = () => {
+    const newIndex = (currentIndex - 1 + flashcards.length) % flashcards.length; // Move to previous card
+    setCurrentIndex(newIndex);
+    setIsFlipped(false);
+    setUserAnswer(""); // Clear user input
+    setFeedback(""); // Clear feedback
+  };
+
+  // Handle user input change
+  const handleInputChange = (event) => {
+    setUserAnswer(event.target.value);
+  };
+
+  // Handle submit button click
+  const handleSubmitAnswer = () => {
+    if (userAnswer.trim().toLowerCase() === flashcards[currentIndex].answer.toLowerCase()) {
+      setFeedback("Correct!");
+    } else {
+      setFeedback("Incorrect. Try again!");
+    }
   };
 
   return (
     <div className="app">
       <h1>Welcome to the Soccer Flashcard App</h1>
-      <p className="description">How good of a soccer fan are you? Test all of your soccer knowledge here!</p>
-      <p className="description">Number of cards: {flashcards.length}</p>
+      <p className="description">Test your soccer knowledge here!</p>
+      <p className="description">Total Cards: {flashcards.length}</p>
+      
       <Flashcard
         card={flashcards[currentIndex]}
         isFlipped={isFlipped}
         handleFlip={handleFlip}
       />
+
+      {/* User input for guessing the answer */}
+      <input 
+        type="text" 
+        placeholder="Your answer..." 
+        value={userAnswer} 
+        onChange={handleInputChange} 
+      />
+      <button onClick={handleSubmitAnswer}>Submit</button>
+
+      {/* Display feedback on whether the answer was correct */}
+      {feedback && <p className="feedback">{feedback}</p>}
+
+      {/* Navigation buttons */}
+      <button onClick={handlePrevCard}>Previous Card</button>
       <button onClick={handleNextCard}>Next Card</button>
     </div>
   );
